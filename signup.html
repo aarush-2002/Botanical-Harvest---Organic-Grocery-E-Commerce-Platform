@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --color-error: #FF6B6B;
+            --color-success: #4CAF50;
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+        }
+
+        .signup-container {
+            max-width: 440px;
+            width: 100%;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-4);
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .signup-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all var(--transition-base);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--color-primary-lighter);
+        }
+
+        .password-strength {
+            margin-top: var(--space-2);
+            height: 4px;
+            background: var(--color-border);
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .strength-bar {
+            height: 100%;
+            width: 0;
+            transition: all var(--transition-base);
+        }
+
+        .strength-weak { width: 33%; background: var(--color-error); }
+        .strength-medium { width: 66%; background: var(--color-accent); }
+        .strength-strong { width: 100%; background: var(--color-success); }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: start;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            margin-top: 2px;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        .checkbox-label a {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: var(--space-5);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .submit-btn:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--color-border);
+        }
+
+        .divider-text {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            font-weight: 600;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .social-btn {
+            padding: var(--space-4);
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            transition: all var(--transition-base);
+        }
+
+        .social-btn:hover {
+            border-color: var(--color-primary);
+            background: var(--color-primary-lighter);
+        }
+
+        .login-prompt {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+        }
+
+        .login-link {
+            color: var(--color-primary);
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        .submit-btn.loading .spinner {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="signup-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo">🌿</div>
+            <div class="brand-name">Botanical Harvest</div>
+            <div class="tagline">Join the organic revolution</div>
+        </div>
+
+        <!-- Signup Card -->
+        <div class="signup-card">
+            <h1 class="card-title">Create Account</h1>
+            <p class="card-subtitle">Start your journey to healthier living</p>
+
+            <!-- Signup Form -->
+            <form id="signupForm" onsubmit="handleSignup(event)">
+                <div class="form-group">
+                    <label class="form-label">Full Name</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input 
+                            type="text" 
+                            class="form-input" 
+                            id="name"
+                            placeholder="John Doe"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="email"
+                            placeholder="your@email.com"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📱</span>
+                        <input 
+                            type="tel" 
+                            class="form-input" 
+                            id="phone"
+                            placeholder="+91 98765 43210"
+                            required
+                        >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="password"
+                            placeholder="Create a strong password"
+                            oninput="checkPasswordStrength()"
+                            required
+                        >
+                    </div>
+                    <div class="password-strength">
+                        <div class="strength-bar" id="strengthBar"></div>
+                    </div>
+                </div>
+
+                <div class="checkbox-wrapper">
+                    <input type="checkbox" id="terms" class="checkbox" required>
+                    <label for="terms" class="checkbox-label">
+                        I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Create Account</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">OR</div>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Social Signup -->
+            <div class="social-login">
+                <button class="social-btn">
+                    <span>🔵</span>
+                    <span>Google</span>
+                </button>
+                <button class="social-btn">
+                    <span>🍎</span>
+                    <span>Apple</span>
+                </button>
+            </div>
+
+            <!-- Login Prompt -->
+            <div class="login-prompt">
+                Already have an account? <a href="login.html" class="login-link">Sign In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const bar = document.getElementById('strengthBar');
+            
+            bar.className = 'strength-bar';
+            
+            if (password.length < 6) {
+                bar.classList.add('strength-weak');
+            } else if (password.length < 10) {
+                bar.classList.add('strength-medium');
+            } else {
+                bar.classList.add('strength-strong');
+            }
+        }
+
+        function handleSignup(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+
+            // Show loading
+            btn.classList.add('loading');
+
+            // Simulate API call
+            setTimeout(() => {
+                // Store user
+                localStorage.setItem('botanicalUser', JSON.stringify({
+                    name: name,
+                    email: email,
+                    loggedIn: true
+                }));
+
+                // Success message
+                alert('Account created successfully! Welcome to Botanical Harvest 🌿');
+                
+                // Redirect to dashboard
+                window.location.href = 'dashboard.html';
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>

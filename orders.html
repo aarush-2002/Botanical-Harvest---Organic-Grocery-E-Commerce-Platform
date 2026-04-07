@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Orders - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-5);
+            background: var(--color-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: var(--space-3);
+            padding: 0 var(--space-5) var(--space-5);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filter-tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-tab {
+            flex-shrink: 0;
+            padding: var(--space-3) var(--space-5);
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .filter-tab.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        /* Orders List */
+        .orders-container {
+            padding: 0 var(--space-5);
+        }
+
+        .order-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            margin-bottom: var(--space-4);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .order-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--space-4);
+        }
+
+        .order-id {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-1);
+        }
+
+        .order-date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .order-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-delivered { background: #d1fae5; color: #065f46; }
+        .status-processing { background: #fed7aa; color: #92400e; }
+        .status-transit { background: #dbeafe; color: #1e40af; }
+        .status-cancelled { background: #fee2e2; color: #991b1b; }
+
+        .order-items {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: var(--space-4);
+            flex-wrap: wrap;
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-bg);
+        }
+
+        .order-total {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .total-amount {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .action-btn {
+            padding: 0.5rem 1rem;
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .action-btn:hover {
+            background: #1B4332;
+        }
+
+        .action-btn.secondary {
+            background: var(--color-white);
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: var(--space-8);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: var(--space-4);
+            opacity: 0.3;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-text {
+            color: var(--color-text-secondary);
+        }
+
+        /* Bottom Nav */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-around;
+            padding: 0.75rem 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+            text-decoration: none;
+            color: var(--color-text-tertiary);
+            padding: 0.5rem;
+            border-radius: 12px;
+        }
+
+        .nav-item.active {
+            background: var(--color-primary-lighter);
+            color: var(--color-primary);
+        }
+
+        .nav-icon { font-size: 1.3rem; }
+        .nav-label { font-size: 0.75rem; font-weight: 600; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <button class="back-btn" onclick="window.location.href='dashboard.html'">←</button>
+            <h1 class="page-title">My Orders</h1>
+            <div style="width: 40px;"></div>
+        </header>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterOrders('all')">All Orders</button>
+            <button class="filter-tab" onclick="filterOrders('processing')">Processing</button>
+            <button class="filter-tab" onclick="filterOrders('transit')">In Transit</button>
+            <button class="filter-tab" onclick="filterOrders('delivered')">Delivered</button>
+            <button class="filter-tab" onclick="filterOrders('cancelled')">Cancelled</button>
+        </div>
+
+        <!-- Orders List -->
+        <div class="orders-container" id="ordersContainer">
+            <!-- Order 1 -->
+            <div class="order-card" data-status="delivered" onclick="window.location.href='order-detail.html?id=1'">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">Order #BH2024-0042</div>
+                        <div class="order-date">Delivered on Dec 15, 2024</div>
+                    </div>
+                    <span class="order-status status-delivered">Delivered</span>
+                </div>
+                <div class="order-items">
+                    <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=100" class="item-image" alt="Product">
+                    <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=100" class="item-image" alt="Product">
+                    <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=100" class="item-image" alt="Product">
+                    <div style="width: 50px; height: 50px; background: var(--color-primary-lighter); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-primary);">+2</div>
+                </div>
+                <div class="order-footer">
+                    <div>
+                        <div class="order-total">5 items • Total</div>
+                        <div class="total-amount">₹243.00</div>
+                    </div>
+                    <button class="action-btn secondary" onclick="event.stopPropagation(); alert('Reorder feature coming soon!')">Reorder</button>
+                </div>
+            </div>
+
+            <!-- Order 2 -->
+            <div class="order-card" data-status="transit" onclick="window.location.href='order-detail.html?id=2'">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">Order #BH2024-0041</div>
+                        <div class="order-date">Arriving Today</div>
+                    </div>
+                    <span class="order-status status-transit">In Transit</span>
+                </div>
+                <div class="order-items">
+                    <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=100" class="item-image" alt="Product">
+                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100" class="item-image" alt="Product">
+                </div>
+                <div class="order-footer">
+                    <div>
+                        <div class="order-total">2 items • Total</div>
+                        <div class="total-amount">₹155.00</div>
+                    </div>
+                    <button class="action-btn" onclick="event.stopPropagation(); window.location.href='order-detail.html?id=2'">Track Order</button>
+                </div>
+            </div>
+
+            <!-- Order 3 -->
+            <div class="order-card" data-status="processing" onclick="window.location.href='order-detail.html?id=3'">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">Order #BH2024-0040</div>
+                        <div class="order-date">Placed on Dec 13, 2024</div>
+                    </div>
+                    <span class="order-status status-processing">Processing</span>
+                </div>
+                <div class="order-items">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=100" class="item-image" alt="Product">
+                    <img src="https://images.unsplash.com/photo-1563636619-e9143da7973b?w=100" class="item-image" alt="Product">
+                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=100" class="item-image" alt="Product">
+                </div>
+                <div class="order-footer">
+                    <div>
+                        <div class="order-total">3 items • Total</div>
+                        <div class="total-amount">₹189.00</div>
+                    </div>
+                    <button class="action-btn" onclick="event.stopPropagation(); window.location.href='order-detail.html?id=3'">View Details</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Browse</span>
+            </a>
+            <a href="dashboard.html" class="nav-item active">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">Profile</span>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">Cart</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        function filterOrders(status) {
+            const cards = document.querySelectorAll('.order-card');
+            const tabs = document.querySelectorAll('.filter-tab');
+            
+            // Update active tab
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            // Filter orders
+            if (status === 'all') {
+                cards.forEach(card => card.style.display = 'block');
+            } else {
+                cards.forEach(card => {
+                    if (card.dataset.status === status) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            }
+        }
+    </script>
+
+</body>
+</html>

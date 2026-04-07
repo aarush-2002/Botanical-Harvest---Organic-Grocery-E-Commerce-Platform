@@ -1,0 +1,904 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Botanical Harvest - Fresh Organic Groceries</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           BOTANICAL HARVEST DESIGN SYSTEM
+           Green, Organic, Calm Aesthetic
+           ============================================ */
+
+        :root {
+            /* Green Palette - Organic & Fresh */
+            --color-primary: #2D5F3F;        /* Deep Forest Green */
+            --color-primary-light: #D4E8D4;  /* Light Mint */
+            --color-primary-lighter: #E8F5E9; /* Pale Green */
+            --color-bg: #F0F7F0;             /* Off-white Green tint */
+            --color-accent: #FFD700;         /* Golden Yellow for CTAs */
+            --color-accent-dark: #E6C200;
+            
+            /* Semantic Colors */
+            --color-success: #4CAF50;
+            --color-sale: #FF6B6B;
+            --color-fresh: #E63946;
+            --color-premium: #1B4332;
+            
+            /* Text Colors */
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            
+            /* Neutrals */
+            --color-white: #FFFFFF;
+            --color-card-bg: #FFFFFF;
+            --color-border: #D4E8D4;
+            
+            /* Shadows - Soft & Natural */
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            
+            /* Border Radius - Organic Rounded */
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            
+            /* Spacing */
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-10: 2.5rem;
+            --space-12: 3rem;
+            
+            /* Typography */
+            --font-primary: 'Inter', -apple-system, sans-serif;
+            
+            /* Transitions */
+            --transition-base: 250ms ease;
+        }
+
+        /* Reset */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            font-size: 16px;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            font-family: var(--font-primary);
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+            overflow-x: hidden;
+        }
+
+        /* Container */
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            position: relative;
+        }
+
+        /* Header */
+        .header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-5) var(--space-5);
+            background: var(--color-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .user-section {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .delivery-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .delivery-label {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .delivery-location {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .notification-btn {
+            width: 44px;
+            height: 44px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .notification-dot {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 10px;
+            height: 10px;
+            background: var(--color-sale);
+            border-radius: 50%;
+            border: 2px solid var(--color-bg);
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            padding: 0 var(--space-5) var(--space-5);
+        }
+
+        .search-box {
+            position: relative;
+            width: 100%;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--color-text-tertiary);
+            font-size: 1.2rem;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-pill);
+            font-size: 0.95rem;
+            color: var(--color-text-primary);
+            transition: all var(--transition-base);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px var(--color-primary-lighter);
+        }
+
+        .search-input::placeholder {
+            color: var(--color-text-tertiary);
+        }
+
+        /* Hero Banner */
+        .hero-banner {
+            margin: 0 var(--space-5) var(--space-6);
+            background: linear-gradient(135deg, var(--color-primary) 0%, #1B4332 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            position: relative;
+            overflow: hidden;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .hero-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 300px;
+            height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+            margin-bottom: var(--space-3);
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1rem;
+            color: rgba(255,255,255,0.9);
+            margin-bottom: var(--space-6);
+        }
+
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-3) var(--space-6);
+            background: var(--color-accent);
+            color: var(--color-text-primary);
+            border: none;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .hero-btn:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+
+        .hero-image {
+            position: absolute;
+            right: -20px;
+            bottom: -20px;
+            width: 200px;
+            opacity: 0.3;
+        }
+
+        /* Section Header */
+        .section-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-6) var(--space-5) var(--space-4);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+        }
+
+        .see-all-link {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            transition: all var(--transition-base);
+        }
+
+        .see-all-link:hover {
+            color: var(--color-premium);
+        }
+
+        /* Category Pills */
+        .category-pills {
+            display: flex;
+            gap: var(--space-3);
+            padding: 0 var(--space-5) var(--space-6);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .category-pills::-webkit-scrollbar {
+            display: none;
+        }
+
+        .category-pill {
+            flex-shrink: 0;
+            padding: var(--space-2) var(--space-5);
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .category-pill:hover,
+        .category-pill.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+            transform: translateY(-2px);
+        }
+
+        /* Category Grid */
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-4);
+            padding: 0 var(--space-5) var(--space-8);
+        }
+
+        .category-card {
+            background: var(--color-white);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            text-align: center;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border: 2px solid transparent;
+        }
+
+        .category-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .category-icon {
+            width: 60px;
+            height: 60px;
+            margin: 0 auto var(--space-3);
+            border-radius: var(--radius-md);
+            background: var(--color-primary-lighter);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+
+        .category-name {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-primary);
+            line-height: 1.3;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+            padding: 0 var(--space-5) var(--space-8);
+        }
+
+        /* Product Card */
+        .product-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        /* Product Badge */
+        .product-badge {
+            position: absolute;
+            top: var(--space-3);
+            left: var(--space-3);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            z-index: 10;
+        }
+
+        .badge-fresh {
+            background: var(--color-fresh);
+            color: white;
+        }
+
+        .badge-sale {
+            background: var(--color-sale);
+            color: white;
+        }
+
+        .badge-premium {
+            background: var(--color-premium);
+            color: white;
+        }
+
+        .badge-organic {
+            background: var(--color-success);
+            color: white;
+        }
+
+        /* Product Image */
+        .product-image-wrapper {
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, var(--color-primary-lighter) 0%, #F5FBF5 100%);
+            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+            padding: var(--space-4);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform var(--transition-base);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        /* Product Info */
+        .product-info {
+            padding: var(--space-4);
+        }
+
+        .product-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+            line-height: 1.3;
+        }
+
+        .product-weight {
+            font-size: 0.8rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-3);
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .product-price-old {
+            font-size: 0.8rem;
+            color: var(--color-text-tertiary);
+            text-decoration: line-through;
+        }
+
+        /* Add Button */
+        .add-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--color-accent);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .add-btn:hover {
+            background: var(--color-accent-dark);
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-3) 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+            text-decoration: none;
+            color: var(--color-text-tertiary);
+            transition: all var(--transition-base);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+        }
+
+        .nav-item.active {
+            background: var(--color-primary-lighter);
+            color: var(--color-primary);
+        }
+
+        .nav-item:hover {
+            color: var(--color-primary);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--color-sale);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Trending Section */
+        .trending-section {
+            background: var(--color-primary-lighter);
+            padding: var(--space-6) 0;
+            margin: var(--space-8) 0;
+        }
+
+        /* Must Haves */
+        .must-haves-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: var(--space-4);
+            padding: 0 var(--space-5) var(--space-8);
+        }
+
+        .horizontal-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            padding: var(--space-4);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border: 2px solid transparent;
+        }
+
+        .horizontal-card:hover {
+            border-color: var(--color-primary);
+            transform: translateX(4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .horizontal-card-image {
+            width: 80px;
+            height: 80px;
+            border-radius: var(--radius-md);
+            object-fit: cover;
+        }
+
+        .horizontal-card-info {
+            flex: 1;
+        }
+
+        .horizontal-card-category {
+            font-size: 0.7rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .horizontal-card-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .horizontal-card-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        /* Show More Button */
+        .show-more-btn {
+            display: block;
+            margin: var(--space-6) auto var(--space-12);
+            padding: var(--space-4) var(--space-8);
+            background: var(--color-white);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-pill);
+            color: var(--color-primary);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .show-more-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .category-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="user-section">
+                <div class="user-avatar">👤</div>
+                <div class="delivery-info">
+                    <span class="delivery-label">Delivering to</span>
+                    <div class="delivery-location">
+                        <span>Home</span>
+                        <span>▼</span>
+                    </div>
+                </div>
+            </div>
+            <button class="notification-btn">
+                🔔
+                <span class="notification-dot"></span>
+            </button>
+        </header>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search 'organic honey' or 'fresh milk'">
+            </div>
+        </div>
+
+        <!-- Hero Banner -->
+        <div class="hero-banner">
+            <div class="hero-content">
+                <h1 class="hero-title">Get 5% OFF on<br>Fruits 🍎</h1>
+                <p class="hero-subtitle">Direct from farm to<br>your kitchen</p>
+                <button class="hero-btn">
+                    <span>Shop Now</span>
+                    <span>→</span>
+                </button>
+            </div>
+            <img src="https://images.unsplash.com/photo-1610832958506-aa56368176cf?w=400" alt="Fruits" class="hero-image">
+        </div>
+
+        <!-- Shop by Category -->
+        <div class="section-header">
+            <h2 class="section-title">Shop by Category</h2>
+            <a href="products.html" class="see-all-link">See All</a>
+        </div>
+
+        <div class="category-grid">
+            <div class="category-card" onclick="window.location.href='products.html?category=vegetables'">
+                <div class="category-icon">🥬</div>
+                <div class="category-name">Vegetables & Fruits</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=dairy'">
+                <div class="category-icon">🥛</div>
+                <div class="category-name">Dairy & Bread</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=snacks'">
+                <div class="category-icon">🍪</div>
+                <div class="category-name">Snacks & Drinks</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=beauty'">
+                <div class="category-icon">💄</div>
+                <div class="category-name">Beauty & Personal Care</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=staples'">
+                <div class="category-icon">🌾</div>
+                <div class="category-name">Atta, Rice & Dal</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=cleaning'">
+                <div class="category-icon">🧹</div>
+                <div class="category-name">Cleaning Essentials</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=pet'">
+                <div class="category-icon">🐾</div>
+                <div class="category-name">Pet Care</div>
+            </div>
+            <div class="category-card" onclick="window.location.href='products.html?category=home'">
+                <div class="category-icon">🏠</div>
+                <div class="category-name">Home & Office</div>
+            </div>
+        </div>
+
+        <!-- Trending Now -->
+        <div class="trending-section">
+            <div class="section-header" style="padding-top: 0;">
+                <h2 class="section-title">Trending Now ⚡</h2>
+                <a href="products.html" class="see-all-link">Explore</a>
+            </div>
+
+            <div class="products-grid">
+                <!-- Product 1 -->
+                <div class="product-card" onclick="window.location.href='product-detail.html?id=1'">
+                    <span class="product-badge badge-fresh">FRESH</span>
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=300&h=300&fit=crop" alt="Avocado" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Organic Hass Avocado</div>
+                        <div class="product-weight">2 units</div>
+                        <div class="product-footer">
+                            <div class="product-price-wrapper">
+                                <span class="product-price">₹120</span>
+                                <span class="product-price-old">₹150</span>
+                            </div>
+                            <button class="add-btn" onclick="event.stopPropagation(); addToCart(1)">+</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="product-card" onclick="window.location.href='product-detail.html?id=2'">
+                    <div class="product-image-wrapper">
+                        <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=300&h=300&fit=crop" alt="Milk" class="product-image">
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">Full Cream Milk</div>
+                        <div class="product-weight">1 Litre</div>
+                        <div class="product-footer">
+                            <div class="product-price-wrapper">
+                                <span class="product-price">₹58</span>
+                            </div>
+                            <button class="add-btn" onclick="event.stopPropagation(); addToCart(2)">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Must Haves -->
+        <div class="section-header">
+            <h2 class="section-title">Must Haves</h2>
+        </div>
+
+        <div class="must-haves-grid">
+            <div class="horizontal-card" onclick="window.location.href='product-detail.html?id=3'">
+                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=160&h=160&fit=crop" alt="Bread" class="horizontal-card-image">
+                <div class="horizontal-card-info">
+                    <div class="horizontal-card-category">BAKERY</div>
+                    <div class="horizontal-card-name">Freshly Baked Sourdough</div>
+                    <div class="horizontal-card-price">₹89</div>
+                </div>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart(3)">+</button>
+            </div>
+
+            <div class="horizontal-card" onclick="window.location.href='product-detail.html?id=4'">
+                <img src="https://images.unsplash.com/photo-1572442388796-11668a67e53d?w=160&h=160&fit=crop" alt="Coffee" class="horizontal-card-image">
+                <div class="horizontal-card-info">
+                    <div class="horizontal-card-category">OFFER</div>
+                    <div class="horizontal-card-name">Dark Roast Coffee</div>
+                    <div class="horizontal-card-price">₹299</div>
+                </div>
+                <button class="add-btn" onclick="event.stopPropagation(); addToCart(4)">+</button>
+            </div>
+        </div>
+
+        <!-- Show More Button -->
+        <button class="show-more-btn">Show more items ▼</button>
+
+        <!-- Spacer for Bottom Nav -->
+        <div style="height: 100px;"></div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Browse</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <span class="nav-icon">🔎</span>
+                <span class="nav-label">Search</span>
+            </a>
+            <a href="cart.html" class="nav-item" style="position: relative;">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">Cart</span>
+                <span class="nav-badge">2</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Cart Management
+        let cart = JSON.parse(localStorage.getItem('botanicalCart')) || [];
+
+        function addToCart(productId) {
+            cart.push({ id: productId, quantity: 1 });
+            localStorage.setItem('botanicalCart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            // Visual feedback
+            event.target.style.transform = 'scale(1.3) rotate(180deg)';
+            setTimeout(() => {
+                event.target.style.transform = '';
+            }, 300);
+            
+            alert('Added to cart! 🌿');
+        }
+
+        function updateCartBadge() {
+            const badge = document.querySelector('.nav-badge');
+            if (badge) {
+                badge.textContent = cart.length;
+            }
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            updateCartBadge();
+        });
+    </script>
+
+</body>
+</html>

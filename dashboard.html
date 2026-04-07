@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Dashboard - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-success: #4CAF50;
+            --color-warning: #FF9800;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        /* Header */
+        .dashboard-header {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-6) var(--space-5);
+            border-radius: 0 0 var(--radius-xl) var(--radius-xl);
+        }
+
+        .header-top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-6);
+        }
+
+        .user-greeting {
+            flex: 1;
+        }
+
+        .greeting-text {
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-1);
+        }
+
+        .user-name {
+            font-size: 1.5rem;
+            font-weight: 800;
+        }
+
+        .header-actions {
+            display: flex;
+            gap: var(--space-3);
+        }
+
+        .icon-btn {
+            width: 44px;
+            height: 44px;
+            background: rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .icon-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Points Card */
+        .points-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .points-info h3 {
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-2);
+        }
+
+        .points-value {
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .points-icon {
+            font-size: 3rem;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            padding: var(--space-6) var(--space-5);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: var(--space-4);
+            color: var(--color-text-primary);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-4);
+        }
+
+        .action-card {
+            text-align: center;
+            cursor: pointer;
+            transition: transform var(--transition-base);
+        }
+
+        .action-card:hover {
+            transform: translateY(-4px);
+        }
+
+        .action-icon {
+            width: 64px;
+            height: 64px;
+            margin: 0 auto var(--space-2);
+            background: white;
+            border-radius: var(--radius-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .action-label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+        }
+
+        /* Recent Orders */
+        .recent-orders {
+            padding: 0 var(--space-5) var(--space-6);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .view-all {
+            color: var(--color-primary);
+            font-size: 0.9rem;
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        .orders-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+        }
+
+        .order-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .order-card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-2px);
+        }
+
+        .order-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: var(--space-4);
+        }
+
+        .order-id {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-1);
+        }
+
+        .order-date {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .order-status {
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-delivered {
+            background: #d1fae5;
+            color: #065f46;
+        }
+
+        .status-processing {
+            background: #fed7aa;
+            color: #92400e;
+        }
+
+        .status-transit {
+            background: #dbeafe;
+            color: #1e40af;
+        }
+
+        .order-items {
+            display: flex;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+        }
+
+        .item-image {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-lg);
+            object-fit: cover;
+        }
+
+        .order-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-total {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .total-amount {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .track-btn {
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 0.85rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .track-btn:hover {
+            background: #1B4332;
+        }
+
+        /* Membership Card */
+        .membership-card {
+            margin: 0 var(--space-5) var(--space-6);
+            background: linear-gradient(135deg, var(--color-primary) 0%, #1B4332 100%);
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .membership-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1), transparent);
+            border-radius: 50%;
+        }
+
+        .membership-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .membership-badge {
+            display: inline-block;
+            padding: var(--space-1) var(--space-3);
+            background: var(--color-accent);
+            color: var(--color-text-primary);
+            border-radius: var(--radius-pill);
+            font-size: 0.75rem;
+            font-weight: 700;
+            margin-bottom: var(--space-3);
+        }
+
+        .membership-title {
+            font-size: 1.5rem;
+            font-weight: 900;
+            margin-bottom: var(--space-2);
+        }
+
+        .membership-desc {
+            font-size: 0.95rem;
+            opacity: 0.9;
+            margin-bottom: var(--space-4);
+        }
+
+        .upgrade-btn {
+            padding: var(--space-3) var(--space-6);
+            background: white;
+            color: var(--color-primary);
+            border: none;
+            border-radius: var(--radius-pill);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .upgrade-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-3) 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+            text-decoration: none;
+            color: var(--color-text-tertiary);
+            padding: var(--space-2);
+            border-radius: 12px;
+            transition: all var(--transition-base);
+        }
+
+        .nav-item.active {
+            background: var(--color-primary-lighter);
+            color: var(--color-primary);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="header-top">
+                <div class="user-greeting">
+                    <div class="greeting-text">Good Morning 👋</div>
+                    <div class="user-name" id="userName">Demo User</div>
+                </div>
+                <div class="header-actions">
+                    <button class="icon-btn">🔔</button>
+                    <button class="icon-btn" onclick="logout()">🚪</button>
+                </div>
+            </div>
+
+            <!-- Points Card -->
+            <div class="points-card">
+                <div class="points-info">
+                    <h3>Green Points</h3>
+                    <div class="points-value">2,450</div>
+                </div>
+                <div class="points-icon">🌱</div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2 class="section-title">Quick Actions</h2>
+            <div class="actions-grid">
+                <div class="action-card" onclick="window.location.href='orders.html'">
+                    <div class="action-icon">📦</div>
+                    <div class="action-label">Orders</div>
+                </div>
+                <div class="action-card" onclick="window.location.href='products.html'">
+                    <div class="action-icon">🛒</div>
+                    <div class="action-label">Shop</div>
+                </div>
+                <div class="action-card" onclick="alert('Wallet feature coming soon!')">
+                    <div class="action-icon">💳</div>
+                    <div class="action-label">Wallet</div>
+                </div>
+                <div class="action-card" onclick="alert('Support: +91 98765 43210')">
+                    <div class="action-icon">💬</div>
+                    <div class="action-label">Support</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="recent-orders">
+            <div class="section-header">
+                <h2 class="section-title">Recent Orders</h2>
+                <a href="orders.html" class="view-all">View All →</a>
+            </div>
+
+            <div class="orders-list">
+                <!-- Order 1 -->
+                <div class="order-card" onclick="window.location.href='order-detail.html?id=1'">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #BH2024-0042</div>
+                            <div class="order-date">Delivered on Dec 15</div>
+                        </div>
+                        <span class="order-status status-delivered">Delivered</span>
+                    </div>
+                    <div class="order-items">
+                        <img src="https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=100" class="item-image" alt="Strawberries">
+                        <img src="https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=100" class="item-image" alt="Spinach">
+                        <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=100" class="item-image" alt="Milk">
+                        <div style="width: 50px; height: 50px; background: var(--color-primary-lighter); border-radius: var(--radius-lg); display: flex; align-items: center; justify-content: center; font-weight: 700; color: var(--color-primary);">+2</div>
+                    </div>
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₹243.00</div>
+                        </div>
+                        <button class="track-btn" onclick="event.stopPropagation(); window.location.href='order-detail.html?id=1'">View Details</button>
+                    </div>
+                </div>
+
+                <!-- Order 2 -->
+                <div class="order-card" onclick="window.location.href='order-detail.html?id=2'">
+                    <div class="order-header">
+                        <div>
+                            <div class="order-id">Order #BH2024-0041</div>
+                            <div class="order-date">Arriving Today</div>
+                        </div>
+                        <span class="order-status status-transit">In Transit</span>
+                    </div>
+                    <div class="order-items">
+                        <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=100" class="item-image" alt="Avocado">
+                        <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=100" class="item-image" alt="Carrots">
+                    </div>
+                    <div class="order-footer">
+                        <div>
+                            <div class="order-total">Total Amount</div>
+                            <div class="total-amount">₹155.00</div>
+                        </div>
+                        <button class="track-btn" onclick="event.stopPropagation(); window.location.href='order-detail.html?id=2'">Track Order</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Membership Card -->
+        <div class="membership-card">
+            <div class="membership-content">
+                <span class="membership-badge">PREMIUM</span>
+                <h3 class="membership-title">Upgrade to Green Plus</h3>
+                <p class="membership-desc">Get free delivery, exclusive deals, and early access to new products</p>
+                <button class="upgrade-btn">Upgrade Now</button>
+            </div>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Browse</span>
+            </a>
+            <a href="dashboard.html" class="nav-item active">
+                <span class="nav-icon">👤</span>
+                <span class="nav-label">Profile</span>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">Cart</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        // Check if user is logged in
+        const user = JSON.parse(localStorage.getItem('botanicalUser'));
+        if (!user || !user.loggedIn) {
+            window.location.href = 'login.html';
+        } else {
+            document.getElementById('userName').textContent = user.name;
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.removeItem('botanicalUser');
+                window.location.href = 'login.html';
+            }
+        }
+    </script>
+
+</body>
+</html>

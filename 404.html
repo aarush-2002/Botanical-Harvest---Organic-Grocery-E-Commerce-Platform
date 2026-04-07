@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - Page Not Found | Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-bg: #F0F7F0;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 600px;
+        }
+
+        .error-icon {
+            font-size: 8rem;
+            margin-bottom: 2rem;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .error-code {
+            font-size: 6rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-bottom: 1rem;
+            line-height: 1;
+        }
+
+        .error-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 3rem;
+            line-height: 1.6;
+        }
+
+        .error-actions {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 100px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--color-primary);
+            border: 2px solid var(--color-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .suggestions {
+            margin-top: 3rem;
+            padding-top: 3rem;
+            border-top: 2px solid #D4E8D4;
+        }
+
+        .suggestions-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .suggestions-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .suggestions-list a {
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .suggestions-list a:hover {
+            padding-left: 1rem;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="error-container">
+        <div class="error-icon">🌿</div>
+        <div class="error-code">404</div>
+        <h1 class="error-title">Oops! Page Not Found</h1>
+        <p class="error-message">
+            The page you're looking for seems to have wandered off into the organic wilderness. 
+            Don't worry, we'll help you find your way back!
+        </p>
+
+        <div class="error-actions">
+            <a href="index.html" class="btn btn-primary">Go Home</a>
+            <a href="products.html" class="btn btn-secondary">Browse Products</a>
+        </div>
+
+        <div class="suggestions">
+            <h3 class="suggestions-title">You might be looking for:</h3>
+            <ul class="suggestions-list">
+                <li><a href="products.html">→ Shop Fresh Produce</a></li>
+                <li><a href="cart.html">→ View Your Cart</a></li>
+                <li><a href="orders.html">→ Track Your Orders</a></li>
+                <li><a href="login.html">→ Sign In</a></li>
+            </ul>
+        </div>
+    </div>
+
+</body>
+</html>

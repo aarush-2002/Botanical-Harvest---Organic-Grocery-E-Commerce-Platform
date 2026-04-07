@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --color-error: #FF6B6B;
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --space-12: 3rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-4);
+        }
+
+        .login-container {
+            max-width: 440px;
+            width: 100%;
+        }
+
+        .logo-section {
+            text-align: center;
+            margin-bottom: var(--space-8);
+        }
+
+        .logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-4);
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+        }
+
+        .brand-name {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .tagline {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        .login-card {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-title {
+            font-size: 1.75rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .card-subtitle {
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-8);
+        }
+
+        .demo-badge {
+            background: var(--color-primary-lighter);
+            border: 2px dashed var(--color-primary);
+            border-radius: var(--radius-lg);
+            padding: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .demo-title {
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--space-2);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .demo-credentials {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+        }
+
+        .demo-credentials strong {
+            color: var(--color-text-primary);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .input-wrapper {
+            position: relative;
+        }
+
+        .input-icon {
+            position: absolute;
+            left: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all var(--transition-base);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--color-primary-lighter);
+        }
+
+        .form-input.error {
+            border-color: var(--color-error);
+        }
+
+        .error-message {
+            color: var(--color-error);
+            font-size: 0.85rem;
+            margin-top: var(--space-2);
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-6);
+        }
+
+        .checkbox-wrapper {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+        }
+
+        .forgot-link {
+            font-size: 0.9rem;
+            color: var(--color-primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color var(--transition-base);
+        }
+
+        .forgot-link:hover {
+            color: #1B4332;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: var(--space-5);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .submit-btn:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin: var(--space-6) 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: var(--color-border);
+        }
+
+        .divider-text {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            font-weight: 600;
+        }
+
+        .social-login {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-3);
+            margin-bottom: var(--space-6);
+        }
+
+        .social-btn {
+            padding: var(--space-4);
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-lg);
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            transition: all var(--transition-base);
+        }
+
+        .social-btn:hover {
+            border-color: var(--color-primary);
+            background: var(--color-primary-lighter);
+        }
+
+        .signup-prompt {
+            text-align: center;
+            font-size: 0.95rem;
+            color: var(--color-text-secondary);
+        }
+
+        .signup-link {
+            color: var(--color-primary);
+            font-weight: 700;
+            text-decoration: none;
+            transition: color var(--transition-base);
+        }
+
+        .signup-link:hover {
+            color: #1B4332;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .btn-text {
+            display: none;
+        }
+
+        .submit-btn.loading .spinner {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <!-- Logo Section -->
+        <div class="logo-section">
+            <div class="logo">🌿</div>
+            <div class="brand-name">Botanical Harvest</div>
+            <div class="tagline">Fresh. Organic. Delivered.</div>
+        </div>
+
+        <!-- Login Card -->
+        <div class="login-card">
+            <h1 class="card-title">Welcome Back!</h1>
+            <p class="card-subtitle">Sign in to continue your organic journey</p>
+
+            <!-- Demo Credentials -->
+            <div class="demo-badge">
+                <div class="demo-title">📌 Demo Account</div>
+                <div class="demo-credentials">
+                    <strong>Email:</strong> demo@botanical.com<br>
+                    <strong>Password:</strong> demo123
+                </div>
+            </div>
+
+            <!-- Login Form -->
+            <form id="loginForm" onsubmit="handleLogin(event)">
+                <div class="form-group">
+                    <label class="form-label">Email Address</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">📧</span>
+                        <input 
+                            type="email" 
+                            class="form-input" 
+                            id="email"
+                            placeholder="your@email.com"
+                            value="demo@botanical.com"
+                            required
+                        >
+                    </div>
+                    <div class="error-message" id="emailError">Please enter a valid email</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Password</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input 
+                            type="password" 
+                            class="form-input" 
+                            id="password"
+                            placeholder="Enter your password"
+                            value="demo123"
+                            required
+                        >
+                    </div>
+                    <div class="error-message" id="passwordError">Password is required</div>
+                </div>
+
+                <div class="form-options">
+                    <div class="checkbox-wrapper">
+                        <input type="checkbox" id="remember" class="checkbox">
+                        <label for="remember" class="checkbox-label">Remember me</label>
+                    </div>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+
+                <button type="submit" class="submit-btn" id="submitBtn">
+                    <span class="btn-text">Sign In</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+
+            <!-- Divider -->
+            <div class="divider">
+                <div class="divider-line"></div>
+                <div class="divider-text">OR</div>
+                <div class="divider-line"></div>
+            </div>
+
+            <!-- Social Login -->
+            <div class="social-login">
+                <button class="social-btn">
+                    <span>🔵</span>
+                    <span>Google</span>
+                </button>
+                <button class="social-btn">
+                    <span>🍎</span>
+                    <span>Apple</span>
+                </button>
+            </div>
+
+            <!-- Signup Prompt -->
+            <div class="signup-prompt">
+                Don't have an account? <a href="signup.html" class="signup-link">Sign Up</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function handleLogin(event) {
+            event.preventDefault();
+            
+            const btn = document.getElementById('submitBtn');
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Show loading
+            btn.classList.add('loading');
+
+            // Simulate API call
+            setTimeout(() => {
+                if (email === 'demo@botanical.com' && password === 'demo123') {
+                    // Store user session
+                    localStorage.setItem('botanicalUser', JSON.stringify({
+                        email: email,
+                        name: 'Demo User',
+                        loggedIn: true
+                    }));
+
+                    // Redirect to dashboard
+                    window.location.href = 'dashboard.html';
+                } else {
+                    // Show error
+                    btn.classList.remove('loading');
+                    alert('Invalid credentials! Use demo@botanical.com / demo123');
+                }
+            }, 1000);
+        }
+
+        // Clear errors on input
+        document.querySelectorAll('.form-input').forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('error');
+                const errorId = input.id + 'Error';
+                document.getElementById(errorId).classList.remove('show');
+            });
+        });
+    </script>
+
+</body>
+</html>

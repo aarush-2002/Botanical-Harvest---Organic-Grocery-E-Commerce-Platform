@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure Checkout - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-success: #4CAF50;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding-bottom: 120px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-5);
+            background: var(--color-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-6) var(--space-5);
+            background: white;
+            margin: 0 var(--space-5) var(--space-6);
+            border-radius: var(--radius-xl);
+        }
+
+        .step {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            margin: 0 auto var(--space-2);
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 800;
+            font-size: 1rem;
+            transition: all var(--transition-base);
+        }
+
+        .step.active .step-number {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .step.completed .step-number {
+            background: var(--color-success);
+            color: white;
+            border-color: var(--color-success);
+        }
+
+        .step-label {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+            font-weight: 600;
+        }
+
+        .step.active .step-label {
+            color: var(--color-primary);
+        }
+
+        .step-connector {
+            position: absolute;
+            top: 20px;
+            left: 50%;
+            width: 100%;
+            height: 2px;
+            background: var(--color-border);
+            z-index: -1;
+        }
+
+        .step.completed + .step .step-connector {
+            background: var(--color-success);
+        }
+
+        /* Form Section */
+        .form-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            margin: 0 var(--space-5) var(--space-5);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            margin-bottom: var(--space-5);
+            color: var(--color-text-primary);
+        }
+
+        .form-group {
+            margin-bottom: var(--space-5);
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: var(--space-4);
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all var(--transition-base);
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            background: white;
+            box-shadow: 0 0 0 4px var(--color-primary-lighter);
+        }
+
+        textarea.form-input {
+            resize: vertical;
+            min-height: 100px;
+        }
+
+        /* Saved Addresses */
+        .saved-addresses {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .address-option {
+            padding: var(--space-4);
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .address-option:hover {
+            border-color: var(--color-primary);
+        }
+
+        .address-option.selected {
+            background: var(--color-primary-lighter);
+            border-color: var(--color-primary);
+        }
+
+        .address-type {
+            font-size: 0.75rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            margin-bottom: var(--space-2);
+        }
+
+        .address-text {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Payment Methods */
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .payment-option {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: var(--color-bg);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .payment-option:hover {
+            border-color: var(--color-primary);
+        }
+
+        .payment-option.selected {
+            background: var(--color-primary-lighter);
+            border-color: var(--color-primary);
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .payment-details {
+            flex: 1;
+        }
+
+        .payment-name {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+
+        .payment-desc {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+        }
+
+        /* Order Summary */
+        .order-summary {
+            background: var(--color-primary-lighter);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+            margin-top: var(--space-5);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-2) 0;
+            font-size: 0.9rem;
+        }
+
+        .summary-label {
+            color: var(--color-text-secondary);
+        }
+
+        .summary-value {
+            font-weight: 700;
+        }
+
+        .summary-total {
+            margin-top: var(--space-3);
+            padding-top: var(--space-3);
+            border-top: 2px solid var(--color-primary);
+            font-size: 1.25rem;
+            font-weight: 900;
+        }
+
+        .summary-total .summary-value {
+            color: var(--color-primary);
+        }
+
+        /* Bottom Action */
+        .bottom-action {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            padding: var(--space-5);
+            z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+        }
+
+        .action-btn {
+            width: 100%;
+            padding: var(--space-5);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .action-btn:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+        }
+
+        .action-btn:disabled {
+            background: var(--color-border);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Success Modal */
+        .success-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.5);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-5);
+        }
+
+        .success-modal.active {
+            display: flex;
+        }
+
+        .success-content {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-8);
+            text-align: center;
+            max-width: 400px;
+            animation: slideUp 0.3s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto var(--space-5);
+            background: var(--color-success);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .success-title {
+            font-size: 1.75rem;
+            font-weight: 900;
+            margin-bottom: var(--space-3);
+            color: var(--color-text-primary);
+        }
+
+        .success-message {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+            line-height: 1.6;
+            margin-bottom: var(--space-6);
+        }
+
+        .order-id {
+            display: inline-block;
+            padding: var(--space-2) var(--space-4);
+            background: var(--color-primary-lighter);
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            color: var(--color-primary);
+            margin-bottom: var(--space-6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <button class="back-btn" onclick="window.location.href='cart.html'">←</button>
+            <h1 class="page-title">Secure Checkout</h1>
+            <div style="width: 40px;"></div>
+        </header>
+
+        <!-- Progress Steps -->
+        <div class="progress-steps">
+            <div class="step completed">
+                <div class="step-number">✓</div>
+                <div class="step-label">Cart</div>
+            </div>
+            <div class="step active">
+                <div class="step-connector"></div>
+                <div class="step-number">2</div>
+                <div class="step-label">Address</div>
+            </div>
+            <div class="step">
+                <div class="step-connector"></div>
+                <div class="step-number">3</div>
+                <div class="step-label">Payment</div>
+            </div>
+        </div>
+
+        <!-- Address Section -->
+        <div class="form-section" id="addressStep">
+            <h2 class="section-title">Delivery Address</h2>
+            <div class="saved-addresses">
+                <div class="address-option selected" onclick="selectAddress(this)">
+                    <div class="address-type">🏠 Home</div>
+                    <div class="address-text">742 Evergreen Terrace, Botanical Heights<br>Suite 402, Green Wing</div>
+                </div>
+                <div class="address-option" onclick="selectAddress(this)">
+                    <div class="address-type">💼 Office</div>
+                    <div class="address-text">123 Green Street, Eco Park<br>Building B, Floor 3</div>
+                </div>
+            </div>
+            <button class="action-btn" style="margin-top: var(--space-5);" onclick="goToPayment()">Continue to Payment →</button>
+        </div>
+
+        <!-- Payment Section (hidden initially) -->
+        <div class="form-section" id="paymentStep" style="display: none;">
+            <h2 class="section-title">Payment Method</h2>
+            <div class="payment-methods">
+                <div class="payment-option selected" onclick="selectPayment(this)">
+                    <div class="payment-icon">💳</div>
+                    <div class="payment-details">
+                        <div class="payment-name">Credit/Debit Card</div>
+                        <div class="payment-desc">Visa, Mastercard, RuPay</div>
+                    </div>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-icon">📱</div>
+                    <div class="payment-details">
+                        <div class="payment-name">UPI</div>
+                        <div class="payment-desc">GPay, PhonePe, Paytm</div>
+                    </div>
+                </div>
+                <div class="payment-option" onclick="selectPayment(this)">
+                    <div class="payment-icon">💵</div>
+                    <div class="payment-details">
+                        <div class="payment-name">Cash on Delivery</div>
+                        <div class="payment-desc">Pay when you receive</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order Summary -->
+            <div class="order-summary">
+                <div class="summary-row">
+                    <span class="summary-label">Item Total</span>
+                    <span class="summary-value">₹228.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label">Delivery Fee</span>
+                    <span class="summary-value">₹40.00</span>
+                </div>
+                <div class="summary-row">
+                    <span class="summary-label" style="color: var(--color-success);">Discount</span>
+                    <span class="summary-value" style="color: var(--color-success);">−₹25.00</span>
+                </div>
+                <div class="summary-row summary-total">
+                    <span class="summary-label">Total Amount</span>
+                    <span class="summary-value">₹243.00</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bottom Action Button (for payment step) -->
+        <div class="bottom-action" id="paymentAction" style="display: none;">
+            <button class="action-btn" onclick="placeOrder()">
+                🔒 Place Order ₹243.00
+            </button>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="success-modal" id="successModal">
+        <div class="success-content">
+            <div class="success-icon">✓</div>
+            <h2 class="success-title">Order Placed! 🎉</h2>
+            <p class="success-message">
+                Your fresh organic groceries are on their way! Estimated delivery in 30 minutes.
+            </p>
+            <div class="order-id">Order ID: #BH2024-0042</div>
+            <button class="action-btn" onclick="window.location.href='index.html'">
+                Back to Home
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function selectAddress(element) {
+            document.querySelectorAll('.address-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function goToPayment() {
+            // Update progress
+            document.querySelectorAll('.step')[1].classList.remove('active');
+            document.querySelectorAll('.step')[1].classList.add('completed');
+            document.querySelectorAll('.step')[2].classList.add('active');
+
+            // Show payment step
+            document.getElementById('addressStep').style.display = 'none';
+            document.getElementById('paymentStep').style.display = 'block';
+            document.getElementById('paymentAction').style.display = 'block';
+
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+
+        function selectPayment(element) {
+            document.querySelectorAll('.payment-option').forEach(opt => {
+                opt.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function placeOrder() {
+            // Simulate processing
+            const btn = event.target;
+            btn.textContent = 'Processing...';
+            btn.disabled = true;
+
+            setTimeout(() => {
+                // Clear cart
+                localStorage.removeItem('botanicalCart');
+                
+                // Show success modal
+                document.getElementById('successModal').classList.add('active');
+            }, 1500);
+        }
+    </script>
+
+</body>
+</html>

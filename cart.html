@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Harvest - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-accent-dark: #E6C200;
+            --color-success: #4CAF50;
+            --color-sale: #FF6B6B;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding-bottom: 180px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-5);
+            background: var(--color-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        /* Hero Section */
+        .cart-hero {
+            padding: var(--space-6) var(--space-5);
+        }
+
+        .cart-title {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+        }
+
+        .cart-subtitle {
+            font-size: 1rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Cart Items */
+        .cart-items {
+            padding: 0 var(--space-5);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .cart-item {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-4);
+            display: flex;
+            gap: var(--space-4);
+            position: relative;
+            transition: all var(--transition-base);
+            border: 2px solid transparent;
+        }
+
+        .cart-item:hover {
+            border-color: var(--color-primary-light);
+            box-shadow: var(--shadow-md);
+        }
+
+        .item-badge {
+            position: absolute;
+            top: var(--space-3);
+            left: var(--space-3);
+            padding: var(--space-1) var(--space-3);
+            background: var(--color-fresh);
+            color: white;
+            border-radius: var(--radius-pill);
+            font-size: 0.65rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .item-image-wrapper {
+            width: 100px;
+            height: 100px;
+            background: var(--color-primary-lighter);
+            border-radius: var(--radius-lg);
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .item-image {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .item-details {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+
+        .item-category {
+            font-size: 0.7rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: var(--space-1);
+        }
+
+        .item-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .item-weight {
+            font-size: 0.85rem;
+            color: var(--color-text-tertiary);
+            font-style: italic;
+        }
+
+        .delete-btn {
+            width: 32px;
+            height: 32px;
+            background: var(--color-bg);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all var(--transition-base);
+        }
+
+        .delete-btn:hover {
+            background: var(--color-sale);
+            color: white;
+            transform: rotate(90deg);
+        }
+
+        .item-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .item-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        /* Quantity Selector */
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            background: var(--color-success);
+            border-radius: var(--radius-pill);
+            padding: var(--space-1);
+            gap: var(--space-2);
+        }
+
+        .qty-btn {
+            width: 28px;
+            height: 28px;
+            background: white;
+            color: var(--color-success);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .qty-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .qty-value {
+            font-size: 1rem;
+            font-weight: 800;
+            color: white;
+            min-width: 24px;
+            text-align: center;
+        }
+
+        /* Delivery Address */
+        .address-section {
+            margin: 0 var(--space-5) var(--space-6);
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-4);
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+        }
+
+        .change-link {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .address-card {
+            display: flex;
+            gap: var(--space-4);
+            padding: var(--space-4);
+            background: var(--color-primary-lighter);
+            border-radius: var(--radius-lg);
+        }
+
+        .address-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-primary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+        }
+
+        .address-details {
+            flex: 1;
+        }
+
+        .address-name {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+        }
+
+        .address-text {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            line-height: 1.5;
+        }
+
+        /* Bill Details */
+        .bill-section {
+            margin: 0 var(--space-5) var(--space-6);
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+        }
+
+        .bill-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-3) 0;
+            font-size: 0.95rem;
+        }
+
+        .bill-row:not(:last-child) {
+            border-bottom: 1px solid var(--color-bg);
+        }
+
+        .bill-label {
+            color: var(--color-text-secondary);
+        }
+
+        .bill-value {
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        .discount-row {
+            color: var(--color-success);
+        }
+
+        .discount-row .bill-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            color: var(--color-success);
+        }
+
+        .total-row {
+            padding-top: var(--space-4);
+            margin-top: var(--space-3);
+            border-top: 2px solid var(--color-primary);
+        }
+
+        .total-label {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+        }
+
+        .total-value {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: var(--color-primary);
+        }
+
+        /* Bottom Checkout Section */
+        .bottom-checkout {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: white;
+            border-top: 1px solid var(--color-border);
+            padding: var(--space-5);
+            z-index: 100;
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.08);
+        }
+
+        .checkout-btn {
+            width: 100%;
+            padding: var(--space-5);
+            background: var(--color-primary);
+            color: white;
+            border: none;
+            border-radius: var(--radius-pill);
+            font-size: 1.1rem;
+            font-weight: 800;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-3);
+            transition: all var(--transition-base);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .checkout-btn:hover {
+            background: #1B4332;
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(45, 95, 63, 0.3);
+        }
+
+        .secure-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            margin-top: var(--space-3);
+            font-size: 0.8rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .secure-icon {
+            font-size: 1rem;
+        }
+
+        /* Empty State */
+        .empty-cart {
+            text-align: center;
+            padding: var(--space-12) var(--space-5);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: var(--space-4);
+            opacity: 0.3;
+        }
+
+        .empty-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-2);
+        }
+
+        .empty-text {
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-6);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='products.html'">←</button>
+                <h1 class="page-title">Botanical Harvest</h1>
+            </div>
+            <div class="user-avatar">👤</div>
+        </header>
+
+        <!-- Cart Hero -->
+        <div class="cart-hero">
+            <h2 class="cart-title">Your Harvest</h2>
+            <p class="cart-subtitle">Review your selections for today's delivery.</p>
+        </div>
+
+        <!-- Cart Items Container -->
+        <div id="cartContainer">
+            <!-- Items will be dynamically loaded here -->
+        </div>
+
+        <!-- Delivery Address -->
+        <div class="address-section" id="addressSection" style="display: none;">
+            <div class="section-header">
+                <h3 class="section-title">Delivery Address</h3>
+                <a href="#" class="change-link">Change ✏️</a>
+            </div>
+            <div class="address-card">
+                <div class="address-icon">    </div>
+                <div class="address-details">
+                    <div class="address-name">Home Sanctuary</div>
+                    <div class="address-text">742 Evergreen Terrace, Botanical Heights<br>Suite 402, Green Wing.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bill Details -->
+        <div class="bill-section" id="billSection" style="display: none;">
+            <h3 class="section-title" style="margin-bottom: var(--space-4);">Bill Details</h3>
+            
+            <div class="bill-row">
+                <span class="bill-label">Item Total</span>
+                <span class="bill-value" id="itemTotal">₹0.00</span>
+            </div>
+            
+            <div class="bill-row">
+                <span class="bill-label">Delivery Fee</span>
+                <span class="bill-value">₹40</span>
+            </div>
+            
+            <div class="bill-row discount-row">
+                <span class="bill-label">
+                    <span>🎉</span>
+                    <span>Freshness Discount</span>
+                </span>
+                <span class="bill-value">−₹25</span>
+            </div>
+            
+            <div class="bill-row total-row">
+                <span class="total-label">Total Amount</span>
+                <span class="total-value" id="totalAmount">₹0.00</span>
+            </div>
+        </div>
+
+        <!-- Bottom Checkout -->
+        <div class="bottom-checkout" id="checkoutSection" style="display: none;">
+            <button class="checkout-btn" onclick="proceedToCheckout()">
+                <span>Proceed to Pay</span>
+                <span>→</span>
+            </button>
+            <div class="secure-badge">
+                <span class="secure-icon">🔒</span>
+                <span>SECURE BOTANICAL CHECKOUT</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sample cart data structure
+        const cartData = [
+            {
+                id: 1,
+                category: 'FRESH HARVEST',
+                name: 'Wild Garden Strawberries',
+                weight: '250g Pack',
+                price: 115,
+                quantity: 1,
+                image: 'https://images.unsplash.com/photo-1464965911861-746a04b4bca6?w=200&h=200&fit=crop',
+                badge: 'FRESH HARVEST'
+            },
+            {
+                id: 2,
+                category: 'QUICK LEAF',
+                name: 'Baby Spinach Bundle',
+                weight: 'approx. 200g',
+                price: 58,
+                quantity: 2,
+                image: 'https://images.unsplash.com/photo-1576045057995-568f588f82fb?w=200&h=200&fit=crop',
+                badge: null
+            }
+        ];
+
+        // Load cart from localStorage or use sample data
+        let cart = JSON.parse(localStorage.getItem('botanicalCart')) || cartData;
+
+        function renderCart() {
+            const container = document.getElementById('cartContainer');
+            
+            if (cart.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-cart">
+                        <div class="empty-icon">🛒</div>
+                        <h3 class="empty-title">Your cart is empty</h3>
+                        <p class="empty-text">Start adding fresh organic produce to your cart</p>
+                        <button class="checkout-btn" onclick="window.location.href='products.html'" style="max-width: 300px; margin: 0 auto;">
+                            Browse Products
+                        </button>
+                    </div>
+                `;
+                document.getElementById('addressSection').style.display = 'none';
+                document.getElementById('billSection').style.display = 'none';
+                document.getElementById('checkoutSection').style.display = 'none';
+                return;
+            }
+
+            let itemsHTML = '<div class="cart-items">';
+            
+            cart.forEach((item, index) => {
+                itemsHTML += `
+                    <div class="cart-item">
+                        ${item.badge ? `<span class="item-badge">${item.badge}</span>` : ''}
+                        <div class="item-image-wrapper">
+                            <img src="${item.image}" alt="${item.name}" class="item-image">
+                        </div>
+                        <div class="item-details">
+                            <div class="item-header">
+                                <div class="item-info">
+                                    <div class="item-category">${item.category}</div>
+                                    <div class="item-name">${item.name}</div>
+                                    <div class="item-weight">${item.weight}</div>
+                                </div>
+                                <button class="delete-btn" onclick="removeItem(${index})">🗑️</button>
+                            </div>
+                            <div class="item-footer">
+                                <div class="item-price">₹${item.price}</div>
+                                <div class="quantity-selector">
+                                    <button class="qty-btn" onclick="updateQuantity(${index}, -1)">−</button>
+                                    <span class="qty-value">${item.quantity}</span>
+                                    <button class="qty-btn" onclick="updateQuantity(${index}, 1)">+</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            itemsHTML += '</div>';
+            container.innerHTML = itemsHTML;
+            
+            // Show other sections
+            document.getElementById('addressSection').style.display = 'block';
+            document.getElementById('billSection').style.display = 'block';
+            document.getElementById('checkoutSection').style.display = 'block';
+            
+            updateBill();
+        }
+
+        function updateQuantity(index, change) {
+            cart[index].quantity += change;
+            if (cart[index].quantity <= 0) {
+                cart.splice(index, 1);
+            }
+            saveCart();
+            renderCart();
+        }
+
+        function removeItem(index) {
+            if (confirm('Remove this item from cart?')) {
+                cart.splice(index, 1);
+                saveCart();
+                renderCart();
+            }
+        }
+
+        function updateBill() {
+            const itemTotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            const deliveryFee = 40;
+            const discount = 25;
+            const total = itemTotal + deliveryFee - discount;
+            
+            document.getElementById('itemTotal').textContent = `₹${itemTotal.toFixed(2)}`;
+            document.getElementById('totalAmount').textContent = `₹${total.toFixed(2)}`;
+        }
+
+        function saveCart() {
+            localStorage.setItem('botanicalCart', JSON.stringify(cart));
+        }
+
+        function proceedToCheckout() {
+            window.location.href = 'checkout.html';
+        }
+
+        // Initialize
+        renderCart();
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whole Organic Milk - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-accent-dark: #E6C200;
+            --color-success: #4CAF50;
+            --color-sale: #FF6B6B;
+            --color-fresh: #E63946;
+            --color-premium: #1B4332;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-5);
+            background: var(--color-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        .page-title {
+            font-size: 1rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        /* Product Image */
+        .product-hero {
+            background: white;
+            border-radius: var(--radius-xl);
+            margin: 0 var(--space-5) var(--space-6);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-badges {
+            position: absolute;
+            top: var(--space-4);
+            left: var(--space-4);
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-2);
+            z-index: 10;
+        }
+
+        .badge {
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .badge-fresh { background: var(--color-fresh); color: white; }
+        .badge-organic { background: var(--color-success); color: white; }
+
+        .product-image-container {
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, var(--color-primary-lighter), #F5FBF5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: var(--space-8);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        /* Product Info */
+        .product-details {
+            padding: 0 var(--space-5);
+        }
+
+        .product-category {
+            font-size: 0.75rem;
+            color: var(--color-primary);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: var(--space-2);
+        }
+
+        .product-title {
+            font-size: 1.75rem;
+            font-weight: 900;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-3);
+        }
+
+        .price-section {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            margin-bottom: var(--space-5);
+        }
+
+        .current-price {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--color-primary);
+        }
+
+        .original-price {
+            font-size: 1.2rem;
+            color: var(--color-text-tertiary);
+            text-decoration: line-through;
+        }
+
+        .discount-badge {
+            padding: var(--space-1) var(--space-3);
+            background: var(--color-success);
+            color: white;
+            border-radius: var(--radius-sm);
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        /* Quantity Selector */
+        .quantity-section {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+        }
+
+        .quantity-selector {
+            display: flex;
+            align-items: center;
+            background: var(--color-success);
+            border-radius: var(--radius-pill);
+            padding: var(--space-2);
+            gap: var(--space-4);
+        }
+
+        .qty-btn {
+            width: 36px;
+            height: 36px;
+            background: white;
+            color: var(--color-success);
+            border: none;
+            border-radius: 50%;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .qty-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .qty-value {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: white;
+            min-width: 30px;
+            text-align: center;
+        }
+
+        .add-to-cart-btn {
+            flex: 1;
+            padding: var(--space-4);
+            background: var(--color-accent);
+            border: none;
+            border-radius: var(--radius-pill);
+            font-weight: 800;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-2);
+            transition: all var(--transition-base);
+        }
+
+        .add-to-cart-btn:hover {
+            background: var(--color-accent-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Information Section */
+        .info-section {
+            background: white;
+            border-radius: var(--radius-xl);
+            padding: var(--space-5);
+            margin: 0 var(--space-5) var(--space-5);
+        }
+
+        .info-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            margin-bottom: var(--space-4);
+        }
+
+        .info-icon {
+            font-size: 1.2rem;
+        }
+
+        .info-title {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+        }
+
+        .info-text {
+            font-size: 0.9rem;
+            line-height: 1.7;
+            color: var(--color-text-secondary);
+        }
+
+        /* Feature Pills */
+        .feature-pills {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-3);
+        }
+
+        .feature-pill {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            padding: var(--space-3) var(--space-4);
+            background: var(--color-primary-lighter);
+            border-radius: var(--radius-md);
+        }
+
+        .feature-icon {
+            font-size: 1.1rem;
+        }
+
+        .feature-content {
+            flex: 1;
+        }
+
+        .feature-label {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .feature-value {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Nutrition Table */
+        .nutrition-table {
+            background: var(--color-primary-lighter);
+            border-radius: var(--radius-md);
+            padding: var(--space-4);
+        }
+
+        .nutrition-header {
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-3);
+        }
+
+        .nutrition-row {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-2) 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+
+        .nutrition-row:last-child {
+            border-bottom: none;
+        }
+
+        .nutrition-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+        }
+
+        .nutrition-value {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Recommendations */
+        .recommendations {
+            padding: 0 var(--space-5);
+        }
+
+        .rec-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: var(--space-4);
+        }
+
+        .rec-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+        }
+
+        .view-more {
+            color: var(--color-primary);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-decoration: none;
+        }
+
+        .rec-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+        }
+
+        .rec-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-3);
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .rec-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .rec-image {
+            width: 100%;
+            aspect-ratio: 1;
+            object-fit: cover;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-2);
+        }
+
+        .rec-name {
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: var(--space-1);
+        }
+
+        .rec-weight {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-2);
+        }
+
+        .rec-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .rec-price {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .rec-add-btn {
+            width: 30px;
+            height: 30px;
+            background: var(--color-accent);
+            border: none;
+            border-radius: 50%;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-3) 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+            text-decoration: none;
+            color: var(--color-text-tertiary);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+        }
+
+        .nav-item.active {
+            background: var(--color-primary-lighter);
+            color: var(--color-primary);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <button class="back-btn" onclick="window.history.back()">←</button>
+            <h1 class="page-title">Botanical Harvest</h1>
+            <div style="display: flex; gap: var(--space-3); align-items: center;">
+                <div class="user-avatar">👤</div>
+                <button class="notification-btn" style="width: 40px; height: 40px; background: var(--color-primary); border: none; border-radius: 50%; cursor: pointer;">🔔</button>
+            </div>
+        </header>
+
+        <!-- Product Image -->
+        <div class="product-hero">
+            <div class="product-badges">
+                <span class="badge badge-fresh"># FRESH HARVEST</span>
+                <span class="badge badge-organic">ORGANIC CERTIFIED</span>
+            </div>
+            <div class="product-image-container">
+                <img src="https://images.unsplash.com/photo-1550583724-b2692b85b150?w=600&h=600&fit=crop" alt="Whole Organic Milk" class="product-image">
+            </div>
+        </div>
+
+        <!-- Product Details -->
+        <div class="product-details">
+            <div class="product-category">DAIRY & COLD PRESS</div>
+            <h2 class="product-title">Whole Organic Milk</h2>
+            
+            <div class="price-section">
+                <span class="current-price">₹120</span>
+                <span class="original-price">₹150</span>
+                <span class="discount-badge">Save 25%</span>
+            </div>
+
+            <!-- Quantity & Add to Cart -->
+            <div class="quantity-section">
+                <div class="quantity-selector">
+                    <button class="qty-btn" onclick="decreaseQty()">−</button>
+                    <span class="qty-value" id="qtyValue">1</span>
+                    <button class="qty-btn" onclick="increaseQty()">+</button>
+                </div>
+                <button class="add-to-cart-btn" onclick="addToCart()">
+                    <span>🛒</span>
+                    <span>Add to Cart</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Product Information -->
+        <div class="info-section">
+            <div class="info-header">
+                <span class="info-icon">📋</span>
+                <h3 class="info-title">Product Information</h3>
+            </div>
+            <p class="info-text">
+                Our Whole Organic Milk comes from grass-fed cows grazing on lush, pesticide-free pastures. Minimally processed to preserve its natural creaminess and rich vitamin profile. No antibiotics, no synthetic hormones—just pure, cold, delicious milk from our local partner farms delivered within 24 hours of milking.
+            </p>
+        </div>
+
+        <!-- Feature Pills -->
+        <div class="info-section">
+            <div class="feature-pills">
+                <div class="feature-pill">
+                    <span class="feature-icon">☀️</span>
+                    <div class="feature-content">
+                        <div class="feature-label">SOURCE</div>
+                        <div class="feature-value">Pasture Raised</div>
+                    </div>
+                </div>
+                <div class="feature-pill">
+                    <span class="feature-icon">❄️</span>
+                    <div class="feature-content">
+                        <div class="feature-label">STORAGE</div>
+                        <div class="feature-value">Keep Chilled</div>
+                    </div>
+                </div>
+                <div class="feature-pill">
+                    <span class="feature-icon">♻️</span>
+                    <div class="feature-content">
+                        <div class="feature-label">IMPACT</div>
+                        <div class="feature-value">Plastic-Free Packaging</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Nutritional Facts -->
+        <div class="info-section">
+            <div class="info-header">
+                <span class="info-icon">🥗</span>
+                <h3 class="info-title">Nutritional Facts</h3>
+            </div>
+            <div class="nutrition-table">
+                <div class="nutrition-header">Per serving (240ml)</div>
+                <div class="nutrition-row">
+                    <span class="nutrition-label">Calories</span>
+                    <span class="nutrition-value">150 kcal</span>
+                </div>
+                <div class="nutrition-row">
+                    <span class="nutrition-label">Total Fat</span>
+                    <span class="nutrition-value">8g</span>
+                </div>
+                <div class="nutrition-row">
+                    <span class="nutrition-label">Saturated Fat</span>
+                    <span class="nutrition-value">5g</span>
+                </div>
+                <div class="nutrition-row">
+                    <span class="nutrition-label">Protein</span>
+                    <span class="nutrition-value">8g</span>
+                </div>
+                <div class="nutrition-row">
+                    <span class="nutrition-label">Calcium</span>
+                    <span class="nutrition-value">30% DV</span>
+                </div>
+                <div class="nutrition-row">
+                    <span class="nutrition-label">Vitamin D</span>
+                    <span class="nutrition-value">15% DV</span>
+                </div>
+            </div>
+            <p style="font-size: 0.75rem; color: var(--color-text-tertiary); margin-top: var(--space-3); font-style: italic;">
+                *Contains: Milk. Certified Organic by USDA and India Harvest authorities.
+            </p>
+        </div>
+
+        <!-- Perfectly Paired -->
+        <div class="recommendations">
+            <div class="rec-header">
+                <h3 class="rec-title">Perfectly Paired</h3>
+                <a href="#" class="view-more">View more →</a>
+            </div>
+            <div class="rec-grid">
+                <div class="rec-card">
+                    <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?w=200&h=200&fit=crop" alt="Sourdough" class="rec-image">
+                    <div class="rec-name">Artisan Sourdough</div>
+                    <div class="rec-weight">Stone-ground • 500g</div>
+                    <div class="rec-footer">
+                        <span class="rec-price">₹135</span>
+                        <button class="rec-add-btn">+</button>
+                    </div>
+                </div>
+                <div class="rec-card">
+                    <img src="https://images.unsplash.com/photo-1587486937028-a0e9a2c4e0c7?w=200&h=200&fit=crop" alt="Honey" class="rec-image">
+                    <div class="rec-name">Wildflower Honey</div>
+                    <div class="rec-weight">Raw & Unfiltered • 250g</div>
+                    <div class="rec-footer">
+                        <span class="rec-price">₹199</span>
+                        <button class="rec-add-btn">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div style="height: 40px;"></div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="products.html" class="nav-item active">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Browse</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <span class="nav-icon">🔎</span>
+                <span class="nav-label">Search</span>
+            </a>
+            <a href="cart.html" class="nav-item">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">Cart</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        let quantity = 1;
+
+        function increaseQty() {
+            quantity++;
+            document.getElementById('qtyValue').textContent = quantity;
+        }
+
+        function decreaseQty() {
+            if (quantity > 1) {
+                quantity--;
+                document.getElementById('qtyValue').textContent = quantity;
+            }
+        }
+
+        function addToCart() {
+            let cart = JSON.parse(localStorage.getItem('botanicalCart')) || [];
+            cart.push({ 
+                id: 'milk-organic',
+                name: 'Whole Organic Milk',
+                price: 120,
+                quantity: quantity,
+                image: 'https://images.unsplash.com/photo-1550583724-b2692b85b150?w=200'
+            });
+            localStorage.setItem('botanicalCart', JSON.stringify(cart));
+            alert('Added ' + quantity + ' item(s) to cart! 🌿');
+            window.location.href = 'cart.html';
+        }
+    </script>
+
+</body>
+</html>

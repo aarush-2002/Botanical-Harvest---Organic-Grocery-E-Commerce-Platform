@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fresh from the Earth - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-accent-dark: #E6C200;
+            --color-success: #4CAF50;
+            --color-sale: #FF6B6B;
+            --color-fresh: #E63946;
+            --color-premium: #1B4332;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-text-tertiary: #7A7A7A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --shadow-lg: 0 8px 24px rgba(45, 95, 63, 0.15);
+            --radius-sm: 12px;
+            --radius-md: 16px;
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --radius-pill: 100px;
+            --space-1: 0.25rem;
+            --space-2: 0.5rem;
+            --space-3: 0.75rem;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+            --transition-base: 250ms ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 480px;
+            margin: 0 auto;
+            background: var(--color-bg);
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        /* Header */
+        .page-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-5);
+            background: var(--color-bg);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+
+        .back-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: all var(--transition-base);
+        }
+
+        .back-btn:hover {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .page-title {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .user-avatar {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--color-primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+        }
+
+        .notification-btn {
+            width: 40px;
+            height: 40px;
+            background: var(--color-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            cursor: pointer;
+            position: relative;
+        }
+
+        /* Hero Title Section */
+        .hero-title-section {
+            padding: var(--space-6) var(--space-5);
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-primary);
+            line-height: 1.1;
+            margin-bottom: var(--space-3);
+        }
+
+        .main-subtitle {
+            font-size: 1.1rem;
+            color: var(--color-text-secondary);
+        }
+
+        /* Search Bar */
+        .search-wrapper {
+            padding: 0 var(--space-5) var(--space-5);
+        }
+
+        .search-box {
+            position: relative;
+        }
+
+        .search-icon {
+            position: absolute;
+            left: var(--space-4);
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.2rem;
+            color: var(--color-text-tertiary);
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-pill);
+            font-size: 0.95rem;
+            transition: all var(--transition-base);
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px var(--color-primary-lighter);
+        }
+
+        /* Filter Pills */
+        .filter-pills {
+            display: flex;
+            gap: var(--space-3);
+            padding: 0 var(--space-5) var(--space-6);
+            overflow-x: auto;
+            scrollbar-width: none;
+        }
+
+        .filter-pills::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-pill {
+            flex-shrink: 0;
+            padding: var(--space-3) var(--space-5);
+            background: var(--color-white);
+            border: 2px solid var(--color-border);
+            border-radius: var(--radius-pill);
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            cursor: pointer;
+            transition: all var(--transition-base);
+            white-space: nowrap;
+        }
+
+        .filter-pill.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary);
+        }
+
+        .filter-pill:hover {
+            transform: translateY(-2px);
+        }
+
+        /* Products Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-4);
+            padding: 0 var(--space-5);
+        }
+
+        .product-card {
+            background: var(--color-white);
+            border-radius: var(--radius-xl);
+            overflow: hidden;
+            cursor: pointer;
+            transition: all var(--transition-base);
+            border: 2px solid transparent;
+            position: relative;
+        }
+
+        .product-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: var(--space-3);
+            left: var(--space-3);
+            padding: var(--space-1) var(--space-3);
+            border-radius: var(--radius-pill);
+            font-size: 0.7rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            z-index: 10;
+        }
+
+        .badge-fresh { background: var(--color-fresh); color: white; }
+        .badge-sale { background: var(--color-sale); color: white; }
+        .badge-premium { background: var(--color-premium); color: white; }
+        .badge-organic { background: var(--color-success); color: white; }
+
+        .product-image-wrapper {
+            aspect-ratio: 1 / 1;
+            background: linear-gradient(135deg, var(--color-primary-lighter) 0%, #F5FBF5 100%);
+            padding: var(--space-4);
+            position: relative;
+        }
+
+        .product-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            transition: transform var(--transition-base);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.08);
+        }
+
+        .product-info {
+            padding: var(--space-4);
+        }
+
+        .product-name {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-1);
+            line-height: 1.3;
+        }
+
+        .product-weight {
+            font-size: 0.8rem;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-3);
+        }
+
+        .product-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .product-price-wrapper {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 800;
+            color: var(--color-primary);
+        }
+
+        .product-price-old {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+            text-decoration: line-through;
+        }
+
+        .add-btn {
+            width: 36px;
+            height: 36px;
+            background: var(--color-accent);
+            border: none;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .add-btn:hover {
+            background: var(--color-accent-dark);
+            transform: scale(1.1) rotate(90deg);
+        }
+
+        /* Show More */
+        .show-more-btn {
+            display: block;
+            margin: var(--space-8) auto;
+            padding: var(--space-4) var(--space-8);
+            background: var(--color-white);
+            border: 2px solid var(--color-primary);
+            border-radius: var(--radius-pill);
+            color: var(--color-primary);
+            font-weight: 700;
+            cursor: pointer;
+            transition: all var(--transition-base);
+        }
+
+        .show-more-btn:hover {
+            background: var(--color-primary);
+            color: white;
+        }
+
+        /* Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 480px;
+            background: var(--color-white);
+            border-top: 1px solid var(--color-border);
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-3) 0;
+            z-index: 100;
+        }
+
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-1);
+            text-decoration: none;
+            color: var(--color-text-tertiary);
+            padding: var(--space-2);
+            border-radius: var(--radius-md);
+            transition: all var(--transition-base);
+        }
+
+        .nav-item.active {
+            background: var(--color-primary-lighter);
+            color: var(--color-primary);
+        }
+
+        .nav-icon {
+            font-size: 1.3rem;
+        }
+
+        .nav-label {
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .nav-badge {
+            position: absolute;
+            top: -4px;
+            right: -4px;
+            background: var(--color-sale);
+            color: white;
+            font-size: 0.65rem;
+            font-weight: 700;
+            min-width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="page-header">
+            <div class="header-left">
+                <button class="back-btn" onclick="window.location.href='index.html'">←</button>
+                <h1 class="page-title">Botanical Harvest</h1>
+            </div>
+            <div style="display: flex; gap: var(--space-3); align-items: center;">
+                <div class="user-avatar">👤</div>
+                <button class="notification-btn">🔔</button>
+            </div>
+        </header>
+
+        <!-- Hero Title -->
+        <div class="hero-title-section">
+            <h2 class="main-title">Fresh from<br>the Earth</h2>
+            <p class="main-subtitle">Handpicked organic produce delivered to your doorstep</p>
+        </div>
+
+        <!-- Search -->
+        <div class="search-wrapper">
+            <div class="search-box">
+                <span class="search-icon">🔍</span>
+                <input type="text" class="search-input" placeholder="Search fresh vegetables, fruits...">
+            </div>
+        </div>
+
+        <!-- Filter Pills -->
+        <div class="filter-pills">
+            <button class="filter-pill active">Popular</button>
+            <button class="filter-pill">Price: Low to High</button>
+            <button class="filter-pill">Sale</button>
+            <button class="filter-pill">Organic</button>
+            <button class="filter-pill">Fresh Arrivals</button>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" onclick="window.location.href='product-detail.html?id=1'">
+                <span class="product-badge badge-fresh">FRESH</span>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1571771894821-ce9b6c11b08e?w=300&h=300&fit=crop" alt="Bananas" class="product-image">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Organic Bananas</div>
+                    <div class="product-weight">500g</div>
+                    <div class="product-footer">
+                        <div class="product-price-wrapper">
+                            <span class="product-price">₹45</span>
+                        </div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart(1)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" onclick="window.location.href='product-detail.html?id=2'">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1587486937028-a0e9a2c4e0c7?w=300&h=300&fit=crop" alt="Bell Pepper" class="product-image">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Red Bell Pepper</div>
+                    <div class="product-weight">2 Units</div>
+                    <div class="product-footer">
+                        <div class="product-price-wrapper">
+                            <span class="product-price">₹89</span>
+                        </div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart(2)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" onclick="window.location.href='product-detail.html?id=3'">
+                <span class="product-badge badge-premium">PREMIUM</span>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1523049673857-eb18f1d7b578?w=300&h=300&fit=crop" alt="Avocado" class="product-image">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Hass Avocado</div>
+                    <div class="product-weight">1 Unit</div>
+                    <div class="product-footer">
+                        <div class="product-price-wrapper">
+                            <span class="product-price">₹120</span>
+                        </div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart(3)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" onclick="window.location.href='product-detail.html?id=4'">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?w=300&h=300&fit=crop" alt="Carrots" class="product-image">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Baby Carrots</div>
+                    <div class="product-weight">250g</div>
+                    <div class="product-footer">
+                        <div class="product-price-wrapper">
+                            <span class="product-price">₹35</span>
+                        </div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart(4)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" onclick="window.location.href='product-detail.html?id=5'">
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1459411621453-7b03977f4bfc?w=300&h=300&fit=crop" alt="Broccoli" class="product-image">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Broccoli Crown</div>
+                    <div class="product-weight">500g</div>
+                    <div class="product-footer">
+                        <div class="product-price-wrapper">
+                            <span class="product-price">₹65</span>
+                        </div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart(5)">+</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" onclick="window.location.href='product-detail.html?id=6'">
+                <span class="product-badge badge-sale">SALE</span>
+                <div class="product-image-wrapper">
+                    <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=300&h=300&fit=crop" alt="Pineapple" class="product-image">
+                </div>
+                <div class="product-info">
+                    <div class="product-name">Sweet Pineapple</div>
+                    <div class="product-weight">1 Unit</div>
+                    <div class="product-footer">
+                        <div class="product-price-wrapper">
+                            <span class="product-price">₹75</span>
+                            <span class="product-price-old">₹99</span>
+                        </div>
+                        <button class="add-btn" onclick="event.stopPropagation(); addToCart(6)">+</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Show More Button -->
+        <button class="show-more-btn">Show more items ▼</button>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item">
+                <span class="nav-icon">🏠</span>
+                <span class="nav-label">Home</span>
+            </a>
+            <a href="products.html" class="nav-item active">
+                <span class="nav-icon">🔍</span>
+                <span class="nav-label">Browse</span>
+            </a>
+            <a href="products.html" class="nav-item">
+                <span class="nav-icon">🔎</span>
+                <span class="nav-label">Search</span>
+            </a>
+            <a href="cart.html" class="nav-item" style="position: relative;">
+                <span class="nav-icon">🛒</span>
+                <span class="nav-label">Cart</span>
+                <span class="nav-badge" id="cartBadge">0</span>
+            </a>
+        </nav>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('botanicalCart')) || [];
+
+        function addToCart(productId) {
+            cart.push({ id: productId, quantity: 1 });
+            localStorage.setItem('botanicalCart', JSON.stringify(cart));
+            updateCartBadge();
+            
+            event.target.style.transform = 'scale(1.3) rotate(180deg)';
+            setTimeout(() => {
+                event.target.style.transform = '';
+            }, 300);
+        }
+
+        function updateCartBadge() {
+            const badge = document.getElementById('cartBadge');
+            badge.textContent = cart.length;
+        }
+
+        // Filter pills interaction
+        document.querySelectorAll('.filter-pill').forEach(pill => {
+            pill.addEventListener('click', () => {
+                document.querySelectorAll('.filter-pill').forEach(p => p.classList.remove('active'));
+                pill.classList.add('active');
+            });
+        });
+
+        updateCartBadge();
+    </script>
+
+</body>
+</html>

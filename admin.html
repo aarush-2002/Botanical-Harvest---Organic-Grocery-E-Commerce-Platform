@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Botanical Harvest</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --color-primary: #2D5F3F;
+            --color-primary-light: #D4E8D4;
+            --color-primary-lighter: #E8F5E9;
+            --color-bg: #F0F7F0;
+            --color-accent: #FFD700;
+            --color-success: #4CAF50;
+            --color-warning: #FF9800;
+            --color-error: #FF6B6B;
+            --color-info: #3B82F6;
+            --color-text-primary: #1A1A1A;
+            --color-text-secondary: #4A4A4A;
+            --color-white: #FFFFFF;
+            --color-border: #D4E8D4;
+            --shadow-sm: 0 2px 8px rgba(45, 95, 63, 0.08);
+            --shadow-md: 0 4px 12px rgba(45, 95, 63, 0.12);
+            --radius-lg: 20px;
+            --radius-xl: 24px;
+            --space-4: 1rem;
+            --space-5: 1.25rem;
+            --space-6: 1.5rem;
+            --space-8: 2rem;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--color-bg);
+            color: var(--color-text-primary);
+        }
+
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-6);
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-6);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header-left h1 {
+            font-size: 2rem;
+            font-weight: 900;
+            margin-bottom: 0.5rem;
+        }
+
+        .header-subtitle {
+            opacity: 0.9;
+        }
+
+        .logout-btn {
+            padding: var(--space-4) var(--space-6);
+            background: rgba(255,255,255,0.2);
+            color: white;
+            border: none;
+            border-radius: 100px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255,255,255,0.3);
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-6);
+        }
+
+        .stat-card {
+            background: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-icon {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            opacity: 0.2;
+        }
+
+        .stat-card.revenue .stat-icon { background: var(--color-success); }
+        .stat-card.orders .stat-icon { background: var(--color-info); }
+        .stat-card.customers .stat-icon { background: var(--color-warning); }
+        .stat-card.products .stat-icon { background: var(--color-primary); }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .stat-value {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--color-text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-change {
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .stat-change.positive { color: var(--color-success); }
+        .stat-change.negative { color: var(--color-error); }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+            margin-bottom: var(--space-6);
+        }
+
+        .section-title {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: var(--space-6);
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-4);
+        }
+
+        .action-card {
+            padding: var(--space-5);
+            background: var(--color-bg);
+            border-radius: var(--radius-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            border-color: var(--color-primary);
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .action-icon {
+            font-size: 2.5rem;
+            margin-bottom: var(--space-4);
+        }
+
+        .action-label {
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* Recent Orders Table */
+        .recent-orders {
+            background: white;
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .table-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-6);
+        }
+
+        .view-all-link {
+            color: var(--color-primary);
+            font-weight: 600;
+            text-decoration: none;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th {
+            text-align: left;
+            padding: var(--space-4);
+            font-size: 0.85rem;
+            color: var(--color-text-secondary);
+            border-bottom: 2px solid var(--color-bg);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        td {
+            padding: var(--space-4);
+            border-bottom: 1px solid var(--color-bg);
+        }
+
+        tr:hover {
+            background: var(--color-bg);
+        }
+
+        .order-id {
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 100px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+
+        .status-delivered { background: #d1fae5; color: #065f46; }
+        .status-processing { background: #fed7aa; color: #92400e; }
+        .status-pending { background: #dbeafe; color: #1e40af; }
+    </style>
+</head>
+<body>
+
+    <div class="admin-container">
+        <!-- Header -->
+        <div class="admin-header">
+            <div class="header-left">
+                <h1>🌿 Admin Dashboard</h1>
+                <p class="header-subtitle">Manage your Botanical Harvest store</p>
+            </div>
+            <button class="logout-btn" onclick="window.location.href='login.html'">Logout</button>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card revenue">
+                <div class="stat-icon">💰</div>
+                <div class="stat-label">Total Revenue</div>
+                <div class="stat-value">₹2,45,890</div>
+                <div class="stat-change positive">↑ 12.5% from last month</div>
+            </div>
+
+            <div class="stat-card orders">
+                <div class="stat-icon">📦</div>
+                <div class="stat-label">Total Orders</div>
+                <div class="stat-value">1,234</div>
+                <div class="stat-change positive">↑ 8.2% from last month</div>
+            </div>
+
+            <div class="stat-card customers">
+                <div class="stat-icon">👥</div>
+                <div class="stat-label">Active Customers</div>
+                <div class="stat-value">856</div>
+                <div class="stat-change positive">↑ 15.3% from last month</div>
+            </div>
+
+            <div class="stat-card products">
+                <div class="stat-icon">🛍️</div>
+                <div class="stat-label">Total Products</div>
+                <div class="stat-value">342</div>
+                <div class="stat-change negative">↓ 2 from last week</div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2 class="section-title">Quick Actions</h2>
+            <div class="actions-grid">
+                <div class="action-card" onclick="window.location.href='admin-products.html'">
+                    <div class="action-icon">📦</div>
+                    <div class="action-label">Manage Products</div>
+                </div>
+                <div class="action-card" onclick="window.location.href='admin-orders.html'">
+                    <div class="action-icon">📋</div>
+                    <div class="action-label">View Orders</div>
+                </div>
+                <div class="action-card" onclick="alert('Customers management coming soon!')">
+                    <div class="action-icon">👥</div>
+                    <div class="action-label">Customers</div>
+                </div>
+                <div class="action-card" onclick="alert('Analytics dashboard coming soon!')">
+                    <div class="action-icon">📊</div>
+                    <div class="action-label">Analytics</div>
+                </div>
+                <div class="action-card" onclick="alert('Inventory management coming soon!')">
+                    <div class="action-icon">📈</div>
+                    <div class="action-label">Inventory</div>
+                </div>
+                <div class="action-card" onclick="alert('Settings coming soon!')">
+                    <div class="action-icon">⚙️</div>
+                    <div class="action-label">Settings</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Orders -->
+        <div class="recent-orders">
+            <div class="table-header">
+                <h2 class="section-title">Recent Orders</h2>
+                <a href="admin-orders.html" class="view-all-link">View All →</a>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Customer</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="order-id">#BH2024-0042</td>
+                        <td>John Doe</td>
+                        <td>Dec 15, 2024</td>
+                        <td><strong>₹243.00</strong></td>
+                        <td><span class="status-badge status-delivered">Delivered</span></td>
+                        <td><a href="#" style="color: var(--color-primary); font-weight: 600;">View</a></td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#BH2024-0041</td>
+                        <td>Jane Smith</td>
+                        <td>Dec 15, 2024</td>
+                        <td><strong>₹155.00</strong></td>
+                        <td><span class="status-badge status-processing">Processing</span></td>
+                        <td><a href="#" style="color: var(--color-primary); font-weight: 600;">View</a></td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#BH2024-0040</td>
+                        <td>Mike Johnson</td>
+                        <td>Dec 14, 2024</td>
+                        <td><strong>₹189.00</strong></td>
+                        <td><span class="status-badge status-pending">Pending</span></td>
+                        <td><a href="#" style="color: var(--color-primary); font-weight: 600;">View</a></td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#BH2024-0039</td>
+                        <td>Sarah Williams</td>
+                        <td>Dec 14, 2024</td>
+                        <td><strong>₹320.00</strong></td>
+                        <td><span class="status-badge status-delivered">Delivered</span></td>
+                        <td><a href="#" style="color: var(--color-primary); font-weight: 600;">View</a></td>
+                    </tr>
+                    <tr>
+                        <td class="order-id">#BH2024-0038</td>
+                        <td>David Brown</td>
+                        <td>Dec 13, 2024</td>
+                        <td><strong>₹275.00</strong></td>
+                        <td><span class="status-badge status-delivered">Delivered</span></td>
+                        <td><a href="#" style="color: var(--color-primary); font-weight: 600;">View</a></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
